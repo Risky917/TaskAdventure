@@ -75,8 +75,8 @@
         </div>
         {{/each}}
         <div class="level-info">Level: {{level}}</div>
-          <div class="xp-bar-wrapper">
-            <div class="xp-bar-container">
+        <div class="xp-bar-wrapper">
+          <div class="xp-bar-container">
             <div class="xp-bar-fill" id="xpFill"></div>
           </div>
           <span>XP: {{xp}} / 100</span>
@@ -87,12 +87,14 @@
         <a href="/Taskmanager" class="create-task-btn">Create one here</a>
       </p>
       <div class="level-info">Level: {{level}}</div>
-       <div class="xp-bar-wrapper">
-          <div class="xp-bar-container">
-            <div class="xp-bar-fill" id="xpFill"></div>
-          </div>
-          <span>XP: {{xp}} / 100</span>
+      <div class="xp-bar-wrapper">
+        <div class="xp-bar-container">
+          <div class="xp-bar-fill" id="xpFill"></div>
         </div>
+        <div class="xp-bar-fill" style="width: {{calculateXpPercentage xp required_xp}}%;"></div>
+        <span>XP: {{xp}} / {{required_xp}}</span>
+
+      </div>
       {{/if}}
       {{/if}}
     </div>
@@ -100,4 +102,5 @@
   </div>
 
 </body>
+
 </html>

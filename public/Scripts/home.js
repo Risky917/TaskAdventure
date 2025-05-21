@@ -70,39 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   }
 
-  // XP BAR
-  // let currentXp = parseInt(document.getElementById("xpInfo").dataset.xp, 10);
-  // let currentLevel = parseInt(document.getElementById("level")?.dataset.level, 10);
-  // let xpNeeded = calculateXpNeeded(currentLevel);
 
-  // const xpFill = document.getElementById("xpFill");
-  // const xpInfo = document.getElementById("xpInfo");
-  // const levelInfo = document.querySelector(".level-info");
-
-  // function calculateXpNeeded(level) {
-  //   return 100 + Math.floor((level - 1) / 5) * 50;
-  // }
-
-  // function updateXPBar() {
-  //   const percent = (currentXp / xpNeeded) * 100;
-  //   xpFill.style.width = percent + "%";
-  //   xpInfo.textContent = `XP: ${currentXp} / ${xpNeeded}`;
-  //   levelInfo.textContent = `Level: ${currentLevel}`;
-  // }
-
-  // function addXP(amount) {
-  //   currentXp += amount;
-
-  //   while (currentXp >= xpNeeded) {
-  //     currentXp -= xpNeeded;
-  //     currentLevel++;
-  //     xpNeeded = calculateXpNeeded(currentLevel);
-  //   }
-
-  //   updateXPBar();
-  // }
-
-  // complete btn
   const completeButtons = document.querySelectorAll(".complete-btn");
 
   completeButtons.forEach(button => {
