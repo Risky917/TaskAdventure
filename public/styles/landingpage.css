@@ -1,0 +1,93 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom, #330066, #1e0033);
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 120px;
+  padding-bottom: 80px;
+  text-align: center;
+}
+
+/* Logo Section */
+.logo-section img.logo {
+  width: 150px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+/* Info Section */
+.info-section h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.info-section .highlight {
+  color: #d9b9ff;
+}
+
+.info-section p {
+  font-size: 18px;
+  margin: 5px 0;
+  color: #f2eaff;
+}
+
+/* Button Styling (like .create-task-btn) */
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #d9b9ff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  margin: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #b98cff;
+}
+
+/* Responsive Enhancements */
+@media (max-width: 768px) {
+  .info-section h1 {
+    font-size: 28px;
+  }
+
+  .info-section p {
+    font-size: 16px;
+  }
+
+  .btn {
+    padding: 8px 16px;
+    font-size: 16px;
+  }
+
+  .logo-section img.logo {
+    width: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .info-section h1 {
+    font-size: 24px;
+  }
+
+  .info-section p {
+    font-size: 14px;
+  }
+
+  .btn {
+    padding: 6px 14px;
+    font-size: 14px;
+  }
+
+  .logo-section img.logo {
+    width: 100px;
+  }
+}

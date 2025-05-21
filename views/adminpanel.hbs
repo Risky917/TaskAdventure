@@ -5,29 +5,30 @@
 
 {{#each users}}
   <div class="admin-user-card">
-    <h2>{{username}} ({{email}})</h2>
+    <h2>{{this.username}} ({{this.email}})</h2>
 
     <!-- Change Username Form -->
     <form action="/admin/change-username" method="POST" class="form-change-username">
-      <input type="hidden" name="userId" value="{{id}}">
+      <input type="hidden" name="userId" value="{{this.id}}">
       <input type="text" name="newUsername" placeholder="Nieuwe gebruikersnaam" required>
       <button type="submit" class="btn change-username-btn">Wijzig naam</button>
     </form>
 
     <!-- Delete User Form -->
     <form action="/admin/delete-user" method="POST" class="form-delete-user" onsubmit="return confirm('Verwijder deze gebruiker?');">
-      <input type="hidden" name="userId" value="{{id}}">
+      <input type="hidden" name="userId" value="{{this.id}}">
       <button type="submit" class="btn delete-user-btn">Verwijder gebruiker</button>
     </form>
 
+    <!-- Characters -->
     <h3>Karakters</h3>
-    {{#if characters.length}}
+    {{#if this.characters.length}}
       <ul>
-        {{#each characters}}
+        {{#each this.characters}}
           <li>
-            {{name}}
+            {{this.name}}
             <form action="/admin/delete-character" method="POST" class="form-delete-character" style="display:inline;">
-              <input type="hidden" name="characterId" value="{{id}}">
+              <input type="hidden" name="characterId" value="{{this.id}}">
               <button type="submit" class="btn delete-character-btn">🗑</button>
             </form>
           </li>
@@ -37,18 +38,27 @@
       <p>Geen karakters</p>
     {{/if}}
 
+    <!-- Pending Tasks -->
     <h3>Pending Taken</h3>
-    {{#if tasks.length}}
+    {{#if this.tasks.length}}
       <ul>
-        {{#each tasks}}
-          <li>
-            {{title}}
+        {{#each this.tasks}}
+          <li class="admin-task-item">
+            <strong>{{this.title}}</strong><br>
+            <small>
+              Character: <em>{{this.characterName}}</em><br>
+              XP: {{this.xp}}<br>
+              Due: {{this.dueDate}}<br>
+              Description: {{this.description}}
+            </small><br>
+
             <form action="/admin/finish-task" method="POST" class="form-finish-task" style="display:inline;">
-              <input type="hidden" name="taskId" value="{{id}}">
+              <input type="hidden" name="taskId" value="{{this.id}}">
               <button type="submit" class="btn finish-task-btn">Finish</button>
             </form>
+
             <form action="/admin/delete-task" method="POST" class="form-delete-task" style="display:inline;">
-              <input type="hidden" name="taskId" value="{{id}}">
+              <input type="hidden" name="taskId" value="{{this.id}}">
               <button type="submit" class="btn delete-task-btn">Delete</button>
             </form>
           </li>
@@ -59,15 +69,3 @@
     {{/if}}
   </div>
 {{/each}}
-
-<!-- SweetAlert Error -->
-{{#if error}}
-<script>
-  Swal.fire({
-    icon: 'error',
-    title: 'Toegang geweigerd',
-    text: '{{error}}',
-    confirmButtonColor: '#d33'
-  });
-</script>
-{{/if}}

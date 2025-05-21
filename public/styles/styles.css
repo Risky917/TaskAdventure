@@ -145,6 +145,9 @@ body.darkgray-theme .dropdown-menu {
 body.lightblue-theme .dropdown-menu {
   background-color: #d2edf7;
 }
+body.lightblue-theme .dropdown-menu a {
+  color: #486975;
+}
 
 /* Character Creation */
 
@@ -299,4 +302,249 @@ body.darkgray-theme .experience {
 body.lightblue-theme .name,
 body.lightblue-theme .experience {
   color: black;
+}
+
+/*body styles*/
+body.lightgray-theme .Titles h1,
+body.lightblue-theme .Titles h1 {
+  color: #000;
+}
+body.darkgray-theme .Titles h1 {
+  color: #FFF;
+}
+
+body.lightgray-theme li,
+body.lightblue-theme li {
+  color: #000;
+}
+
+body.lightgray-theme div,
+body.lightblue-theme div {
+  color: #000;
+}
+
+body.lightblue-theme label
+{
+  color: #000;
+}
+body.lightblue-theme h3
+{
+  color: #000;
+}
+body.lightblue-theme h2
+{
+  color: #000;
+}
+body.lightblue-theme .form-group label,
+body.lightblue-theme span
+{
+  color: white;
+}
+body.lightblue-theme .add-task-form,
+body.lightblue-theme .task-list,
+body.lightblue-theme .task-item{
+    background-color: #296b79;
+    color: white;
+}
+body.lightblue-theme .form-group input,
+body.lightblue-theme .form-group textarea
+{
+  background-color: #1e4d57;
+}
+body.lightblue-theme .user-info form button{
+  background-color: #1e4d57;
+}
+body.lightblue-theme .login-link a
+{
+  background-color: #1e4d57;
+}
+body.lightblue-theme input{
+  background-color: #1e4d57;
+}
+body.lightblue-theme .login-container{
+  background-color: #296b79;
+}
+body.lightblue-theme .input-group label,
+body.lightblue-theme .links a,
+body.lightblue-theme .login-container h2
+{
+  color: white;
+}
+body.lightblue-theme .profile-container
+{
+  background-color: #296b79;
+}
+body.lightblue-theme .profile-container form label,
+body.lightblue-theme .profile-container h1
+{
+  color: white;
+}
+body.lightblue-theme form input,
+body.lightblue-theme .admin-user-card h2,
+body.lightblue-theme .admin-user-card h3,
+body.lightblue-theme .admin-user-card p
+{
+  color: white;
+}
+body.lightblue-theme .change-username-btn
+{
+  background-color: #296b79;
+}
+body.lightblue-theme .admin-user-card
+{
+  background-color: #1e4d57;
+}
+/*Default color theme*/
+body.default-theme .add-task-form,
+body.default-theme .task-list,
+body.default-theme .task-item{
+    background-color: #5a2677;
+    color: white;
+}
+body.default-theme .form-group input,
+body.default-theme .form-group textarea
+{
+  background-color: #3e008d;
+}
+body.default-theme .task-list-header,
+body.default-theme .add-task-form-header
+{
+  color: white;
+}
+body.default-theme form input,
+body.default-theme .admin-user-card h3,
+body.default-theme .admin-user-card p
+{
+  color: white;
+}
+body.default-theme .change-username-btn
+{
+  background-color: #5a2677;
+}
+body.default-theme .admin-user-card
+{
+  background-color: #3e008d;
+}
+/*lightgray color theme*/
+body.lightgray-theme .add-task-form,
+body.lightgray-theme .task-list,
+body.lightgray-theme .task-item{
+    background-color: #58555a;
+    color: white;
+}
+body.lightgray-theme .form-group input,
+body.lightgray-theme .form-group textarea
+{
+  background-color: #333135;
+}
+body.lightgray-theme .task-list-header,
+body.lightgray-theme .add-task-form-header
+{
+  color: white;
+}
+body.lightgray-theme span{
+  color: white;
+}
+body.lightgray-theme .login-link a
+{
+  background-color: #323536;
+}
+body.lightgray-theme .user-info form button{
+  background-color: #323536;
+}
+body.lightgray-theme input{
+  background-color: #333135;
+}
+body.lightgray-theme .login-container{
+  background-color: #58555a;
+}
+body.lightgray-theme .input-group label,
+body.lightgray-theme .links a,
+body.lightgray-theme .login-container h2
+{
+  color: white;
+}
+body.lightgray-theme .profile-container
+{
+  background-color: #58555a;
+}
+body.lightgray-theme .profile-container form label,
+body.lightgray-theme .profile-container h1
+{
+  color: white;
+}
+body.lightgray-theme .timer-controls input,
+body.lightgray-theme form input,
+body.lightgray-theme .admin-user-card h3,
+body.lightgray-theme .admin-user-card p
+{
+  color: white;
+}
+body.lightgray-theme .change-username-btn
+{
+  background-color: #58555a;
+}
+body.lightgray-theme .admin-user-card
+{
+  background-color: #333135;
+}
+/*Darkgray theme color*/
+body.darkgray-theme .add-task-form,
+body.darkgray-theme .task-list,
+body.darkgray-theme .task-item{
+    background-color: #58555a;
+    color: white;
+}
+body.darkgray-theme .form-group input,
+body.darkgray-theme .form-group textarea
+{
+  background-color: #333135;
+}
+body.darkgray-theme .task-list-header,
+body.darkgray-theme .add-task-form-header
+{
+  color: white;
+}
+body.darkgray-theme span{
+  color: white;
+}
+body.darkgray-theme .login-link a
+{
+  background-color: #58555a;
+}
+body.darkgray-theme .user-info form button{
+  background-color: #58555a;
+}
+body.darkgray-theme input{
+  background-color: #333135;
+}
+body.darkgray-theme .login-container{
+  background-color: #58555a;
+}
+body.darkgray-theme .input-group label,
+body.darkgray-theme .links a,
+body.darkgray-theme .login-container h2
+{
+  color: white;
+}
+body.darkgray-theme .profile-container
+{
+  background-color: #58555a;
+}
+body.darkgray-theme .profile-container form label,
+body.darkgray-theme .profile-container h1
+{
+  color: white;
+}
+body.darkgray-theme .timer-controls input
+{
+  color: white;
+}
+body.darkgray-theme form input
+{
+  color: white;
+}
+body.darkgray-theme .change-username-btn
+{
+  background-color: #58555a;
 }

@@ -130,3 +130,11 @@
     align-items: center;
     gap: 15px;
 }
+
+
+/*responsiveness*/
+@media (max-width: 700px) {
+  .title {
+    display: none;
+  }
+}

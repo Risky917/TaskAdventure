@@ -7,7 +7,7 @@
   <title>Home</title>
   <link rel="stylesheet" href="/styles/Home.css" />
   <script>
-    const currentUserId = {{ user.id }};
+    const currentUser Id = {{ user.id }};
   </script>
   <script src="/scripts/Home.js" defer></script>
 </head>
@@ -23,8 +23,9 @@
     {{else}}
     <div class="character-section">
       <h1>Welcome, {{user.username}}</h1>
+
       <!-- Character selection dropdown -->
-      <form action="/" method="GET">
+      <form action="/home" method="GET">
         <label for="character-select">Choose a character:</label>
         <select id="character-select" name="characterId" required onchange="this.form.submit()">
           <option value="">-- Select a character --</option>
@@ -37,10 +38,10 @@
 
       <div class="character-info">
         {{#if selectedCharacterId}}
-        {{#with (lookupCharacter characters selectedCharacterId)}}
+        {{#with (lookup characters selectedCharacterId)}}
         <div class="character-card">
-          <h2>{{name}}</h2>
-          <img src="{{imagevalue}}" alt="{{name}}" class="character-image">
+          <h2>{{this.name}}</h2>
+          <img src="/img/malePixel.png" alt="{{this.name}}" class="character-image">
         </div>
         {{/with}}
         {{else}}
@@ -54,7 +55,8 @@
 
     <div class="task-section">
       {{#if selectedCharacterId}}
-      <h2>Active tasks for {{this.name}}</h2>
+      <h2>Active tasks for {{#with (lookup characters selectedCharacterId)}}{{this.name}}{{/with}}</h2>
+
       {{#if tasks.length}}
       <div class="task-list">
         {{#each tasks}}
@@ -69,32 +71,15 @@
         <div class="task-details hidden">
           <p><strong>Description:</strong> {{description}}</p>
           <p><strong>XP:</strong> {{xp}}</p>
-          <form action="/task/complete/{{id}}?characterId={{../selectedCharacterId}}" method="POST">
-            <button type="submit">Complete</button>
-          </form>
-        </div>
+<form action="/task/complete/{{id}}" method="POST" style="display: inline;">
+  <button type="submit">Complete</button>
+</form>        </div>
         {{/each}}
-        <div class="level-info">Level: {{level}}</div>
-        <div class="xp-bar-wrapper">
-          <div class="xp-bar-container">
-            <div class="xp-bar-fill" id="xpFill"></div>
-          </div>
-          <span>XP: {{xp}} / 100</span>
-        </div>
       </div>
       {{else}}
       <p>You have no active tasks for this character.
         <a href="/Taskmanager" class="create-task-btn">Create one here</a>
       </p>
-      <div class="level-info">Level: {{level}}</div>
-      <div class="xp-bar-wrapper">
-        <div class="xp-bar-container">
-          <div class="xp-bar-fill" id="xpFill"></div>
-        </div>
-        <div class="xp-bar-fill" style="width: {{calculateXpPercentage xp required_xp}}%;"></div>
-        <span>XP: {{xp}} / {{required_xp}}</span>
-
-      </div>
       {{/if}}
       {{/if}}
     </div>

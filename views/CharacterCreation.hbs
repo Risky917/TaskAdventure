@@ -61,7 +61,7 @@
 
 if (result.success) {
   Swal.fire('Gelukt!', result.message, 'success').then(() => {
-    window.location.href = 'http://localhost:3000/';  // Vooruit naar profielpagina
+    window.location.href = 'http://localhost:3000/home';  // Vooruit naar profielpagina
   });
 } else {
   Swal.fire('Mislukt', result.message || 'Er is iets misgegaan.', 'error');

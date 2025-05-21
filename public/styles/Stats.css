@@ -74,3 +74,57 @@ section {
   text-align: center;
   color: white;
 }
+
+/* Task Completed: groene achtergrond -> witte tekst */
+.TaskCopleted h4,
+.TaskCopleted .Stats {
+  color: rgb(11, 74, 25);
+}
+
+/* Task Failed: rode achtergrond -> witte tekst */
+.TaskNotCopleted h4,
+.TaskNotCopleted .Stats {
+  color: rgb(108, 16, 16);
+}
+
+/* Total XP Gained: oranje achtergrond -> zwarte tekst */
+.TotalXpGained h4,
+.TotalXpGained .Stats {
+  color: rgb(126, 84, 10);
+}
+
+/* Friends: lichtblauwe achtergrond -> zwarte tekst */
+.Friends h4,
+.Friends .Stats {
+  color: rgb(11, 73, 90);
+}
+
+/* Time spent on task: donkerpaarse achtergrond -> witte tekst */
+.timeSpentOnTask h4,
+.timeSpentOnTask .Stats {
+  color: rgb(157, 70, 181);
+}
+
+/* Most XP For One Task: gele achtergrond -> zwarte tekst */
+.MostXpForOneTask h4,
+.MostXpForOneTask .Stats {
+  color: rgb(122, 113, 27);
+}
+
+/* Most Task In 24h: donkerblauw -> witte tekst */
+.MostTaskIn24h h4,
+.MostTaskIn24h .Stats {
+  color: rgb(112, 127, 191);
+}
+
+/* Daily Streak: paars-roze achtergrond -> witte tekst */
+.DailyStreak h4,
+.DailyStreak .Stats {
+  color: rgb(102, 24, 106);
+}
+
+/* Unknown fallback */
+.unkown h4,
+.unkown .Stats {
+  color: white;
+}
