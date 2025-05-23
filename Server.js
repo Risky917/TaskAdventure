@@ -232,6 +232,7 @@ app.post('/task/complete/:id', requireLogin, (req, res) => {
     db.get('SELECT * FROM characters WHERE id = ?', [characterId], (err, character) => {
       if (err || !character) return res.status(500).send('Character niet gevonden');
 
+      const userId = character.userId;
       const newXp = (character.xp || 0) + taskXp;
       let newLevel = character.level || 1;
       const requiredXp = 100;
@@ -246,21 +247,42 @@ app.post('/task/complete/:id', requireLogin, (req, res) => {
         function (err) {
           if (err) return res.status(500).send('Update character faalde');
 
-          db.run(
-            'UPDATE tasks SET completed = 1 WHERE id = ?',
-            [taskId],
-            function (err) {
-              if (err) return res.status(500).send('Taak voltooien faalde');
-
-              res.redirect('/home?characterId=' + characterId); // Redirect naar de home pagina
-
+          db.get('SELECT * FROM stats WHERE userId = ?', [userId], (err, stats) => {
+            if (err || !stats) {
+              console.warn('Stats niet gevonden voor userId:', userId);
+              return res.redirect('/home?characterId=' + characterId);
             }
-          );
+
+            const updatedTaskCompleted = (stats.taskCompleted || 0) + 1;
+            const updatedXp = (stats.totalXpGained || 0) + taskXp;
+
+            // ✅ Bepaal of deze taak de meeste XP tot nu toe heeft opgeleverd
+            const updatedMostXp = Math.max(taskXp, stats.mostXpForOneTask || 0);
+
+            db.run(
+              'UPDATE stats SET taskCompleted = ?, totalXpGained = ?, mostXpForOneTask = ? WHERE userId = ?',
+              [updatedTaskCompleted, updatedXp, updatedMostXp, userId],
+              (err) => {
+                if (err) console.error('Fout bij updaten van stats:', err);
+
+                db.run(
+                  'UPDATE tasks SET completed = 1 WHERE id = ?',
+                  [taskId],
+                  function (err) {
+                    if (err) return res.status(500).send('Taak voltooien faalde');
+
+                    res.redirect('/home?characterId=' + characterId); // Redirect naar de home pagina
+
+                  });
+              }
+            );
+          });
         }
       );
     });
   });
 });
+
 
 
 
@@ -436,14 +458,25 @@ app.post('/CreateAccount', (req, res) => {
           if (err) {
             console.error('Failed to assign role:', err);
           }
+          db.run(
+            `INSERT INTO stats (userId, username) VALUES (?, ?)`,
+            [userId, username],
+            (err) => {
+              if (err) {
+                console.error("❌ Kon stats niet aanmaken voor nieuwe gebruiker:", err);
+                // Hier kun je eventueel res.render met foutmelding doen
+                // maar we gaan gewoon verder met account creatie
+              }
 
-          req.session.user = { id: userId, username, email };
-          res.redirect('/CharacterCreation');
+              req.session.user = { id: userId, username, email };
+              res.redirect('/CharacterCreation');
+            });
         });
       });
     });
   });
 });
+
 
 
 // Logout

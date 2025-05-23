@@ -141,12 +141,16 @@ font-family: 'Segoe UI', sans-serif;
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
+#characterImg[src$="malePixel.png"] {
+  transform: scale(0.7);
+}
+
 #characterImg[src$="purpleguy.png"] {
-  transform: scale(2.2);
+  transform: scale(1.9);
 }
 
 #characterImg[src$="pixelFemale.png"] {
-  transform: scale(1.1);
+  transform: scale(1.0);
 }
 
 #characterImg[src$="Hermit.png"] {
@@ -154,11 +158,11 @@ font-family: 'Segoe UI', sans-serif;
 }
 
 #characterImg[src$="FeyereJoe.png"] {
-  transform: scale(2.9);
+  transform: scale(0.1);
 }
 
 #characterImg[src$="samurai.png"] {
-  transform: scale(0.5);
+  transform: scale(0.4);
 }
 
 .character-frame img.fade-out {
