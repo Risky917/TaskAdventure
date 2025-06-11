@@ -5,7 +5,7 @@
 
 <body>
     <div class="container">
-        <input type="text" id="friendSearch" placeholder="Zoek gebruikers...">
+        <input type="text" id="friendSearch" placeholder="Search users...">
         <div class="scroll-box">
             <div class="scroll-content" id="friendList"> {{#each potentialFriends}}
                 <div class="item">
@@ -15,13 +15,14 @@
                 </div>
                 {{/each}}
                 <div id="noResults" style="display: none; text-align: center; color: #888; padding: 20px;">
-                    Geen gebruikers gevonden.
+                    No users found.
                 </div>
             </div>
         </div>
+        <button class="button-friendpage" onclick="location.href='/my-friends'" type="button">Friends</button>
+        <button class="button-friendpage" onclick="location.href='/friend-requests'" type="button">Friend requests</button>
     </div>
-    <button onclick="location.href='/my-friends'" type="button">Friends</button>
-    <button onclick="location.href='/friend-requests'" type="button">Friend requests</button>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const searchInput = document.getElementById('friendSearch');

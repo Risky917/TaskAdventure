@@ -26,9 +26,10 @@
                 {{/if}}
             </div>
         </div>
+        <button class="button-friendpage" onclick="location.href='/my-friends'" type="button">Friends</button>
+        <button class="button-friendpage" onclick="location.href='/Friends'" type="button">send friend request</button>
     </div>
-    <button onclick="location.href='/my-friends'" type="button">Friends</button>
-    <button onclick="location.href='/Friends'" type="button">send friend request</button>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const requestItems = document.querySelectorAll('.request-item');
