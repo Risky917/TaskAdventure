@@ -80,3 +80,15 @@ body{
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); /* Een subtiele "glow" bij focus */
     transform: translateY(-2px); /* Geef een klein 'lift'-effect */
 }
+.button-friendpage {
+
+  padding: 5px;
+  border-radius: 8px;
+  color: #1e1e1e;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-size: 1.2rem;
+  width: 30%;
+}

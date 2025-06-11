@@ -21,10 +21,11 @@
                 {{/if}}
             </div>
         </div>
+        <button class="button-friendpage" onclick="location.href='/friend-requests'" type="button">Friend requests</button>
+        <button class="button-friendpage" onclick="location.href='/Friends'" type="button">Send friend request</button>
     </div>
     
-    <button onclick="location.href='/friend-requests'" type="button">Friend requests</button>
-    <button onclick="location.href='/Friends'" type="button">Send friend request</button>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const removeFriendButtons = document.querySelectorAll('.remove-friend-btn');
