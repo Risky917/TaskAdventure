@@ -271,7 +271,7 @@ app.post('/task/complete/:id', requireLogin, (req, res) => {
         'UPDATE characters SET xp = ?, level = ? WHERE id = ?',
         [newXp, newLevel, characterId],
         function (err) {
-          if (err) return res.status(500).send('Update character faalde');
+          if (err) return res.status(500).send('Update character failed');
 
           db.get('SELECT * FROM stats WHERE userId = ?', [userId], (err, stats) => {
             if (err || !stats) {
@@ -288,11 +288,11 @@ app.post('/task/complete/:id', requireLogin, (req, res) => {
               'UPDATE stats SET taskCompleted = ?, totalXpGained = ?, mostXpForOneTask = ? WHERE userId = ?',
               [updatedTaskCompleted, updatedXp, updatedMostXp, userId],
               (err) => {
-                if (err) console.error('Fout bij updaten van stats:', err);
+                if (err) console.error('error updating stats:', err);
 
                 db.run('UPDATE tasks SET pending = 0, completed = 1 WHERE id = ?', [taskId],
                   function (err) {
-                    if (err) return res.status(500).send('Taak voltooien faalde');
+                    if (err) return res.status(500).send('Task completion failed');
 
                     res.redirect('/home?characterId=' + characterId);
 
@@ -335,7 +335,7 @@ app.get('/Taskmanager', requireLogin, (req, res) => {
     WHERE dueDate < date('now')
       AND characterId IN (SELECT id FROM characters WHERE userId = ?)
   `, [userId], (err) => {
-    if (err) return res.status(500).send('Fout bij het verwijderen van verlopen taken');
+    if (err) return res.status(500).send('Error deleting expired tasks');
 
     db.all(`
         SELECT c.*, ci.baseImage, ci.evolutionStage1Image, ci.evolutionStage2Image
@@ -438,9 +438,9 @@ app.get('/Login', (req, res) => res.render('Login', { pageTitel: 'Login' }));
 app.post('/Login', (req, res) => {
   const { username, password } = req.body;
   findUser(username, (err, user) => {
-    if (err || !user) return res.render('Login', { error: 'Gebruiker niet gevonden.', pageTitel: 'Login' });
+    if (err || !user) return res.render('Login', { error: 'User not found.', pageTitel: 'Login' });
     bcrypt.compare(password, user.password, (err, isMatch) => {
-      if (err || !isMatch) return res.render('Login', { error: 'Wachtwoord incorrect.' });
+      if (err || !isMatch) return res.render('Login', { error: 'Password incorrect.' });
       req.session.user = user;
       res.redirect('/home');
     });
@@ -494,7 +494,7 @@ app.post('/CreateAccount', upload.single('profileImage'), (req, res) => {
 
           db.run('INSERT INTO stats (userId, username) VALUES (?, ?)', [userId, username], (err) => {
             if (err) {
-              console.error("❌ Kon stats niet aanmaken voor nieuwe gebruiker:", err);
+              console.error("❌ could not create stats for new user:", err);
             }
 
             req.session.user = { id: userId, username, email, profileImage };
@@ -961,7 +961,7 @@ app.get('/profile', requireLogin, (req, res) => {
 
   db.get(`SELECT username, email FROM users WHERE id = ?`, [user.id], (err, row) => {
     if (err) {
-      return res.status(500).send('Fout bij ophalen profiel.');
+      return res.status(500).send('Error retrieving profile.');
     }
 
     res.render('Profile', { user: row, });
@@ -974,23 +974,23 @@ app.post('/profile/update', requireLogin, (req, res) => {
   const userId = req.session.user.id;
 
   if (!username || !email) {
-    return res.status(400).json({ success: false, message: 'Alle velden zijn verplicht!' });
+    return res.status(400).json({ success: false, message: 'All fields are required!' });
   }
 
   const checkSql = `SELECT id FROM users WHERE username = ? AND id != ?`;
   db.get(checkSql, [username, userId], (err, row) => {
     if (err) {
-      return res.status(500).json({ success: false, message: 'Databasefout.' });
+      return res.status(500).json({ success: false, message: 'DatabaseError.' });
     }
 
     if (row) {
-      return res.status(400).json({ success: false, message: 'Gebruikersnaam al in gebruik.' });
+      return res.status(400).json({ success: false, message: 'Username already in use.' });
     }
 
     const getOldUsernameSql = `SELECT username FROM users WHERE id = ?`;
     db.get(getOldUsernameSql, [userId], (err, user) => {
       if (err || !user) {
-        return res.status(500).json({ success: false, message: 'Gebruiker niet gevonden.' });
+        return res.status(500).json({ success: false, message: 'User not found.' });
       }
 
       const oldUsername = user.username;
@@ -998,19 +998,19 @@ app.post('/profile/update', requireLogin, (req, res) => {
       const updateUserSql = `UPDATE users SET username = ?, email = ? WHERE id = ?`;
       db.run(updateUserSql, [username, email, userId], function (err) {
         if (err) {
-          return res.status(500).json({ success: false, message: 'Fout bij gebruikersupdate.' });
+          return res.status(500).json({ success: false, message: 'User update error.' });
         }
 
         const updateStatsSql = `UPDATE stats SET username = ? WHERE username = ?`;
         db.run(updateStatsSql, [username, oldUsername], function (err) {
           if (err) {
-            return res.status(500).json({ success: false, message: 'Fout bij stats-update.' });
+            return res.status(500).json({ success: false, message: 'Error during stats update.' });
           }
 
           req.session.user.username = username;
           req.session.user.email = email;
 
-          return res.json({ success: true, message: 'Profiel succesvol bijgewerkt.' });
+          return res.json({ success: true, message: 'Profile updated successfully.' });
         });
       });
     });
@@ -1025,16 +1025,16 @@ app.post('/reset-password', (req, res) => {
   const { username, newPassword } = req.body;
 
   db.get('SELECT * FROM users WHERE username = ?', [username], (err, user) => {
-    if (err) return res.render('reset-password', { error: 'Databasefout' });
-    if (!user) return res.render('reset-password', { error: 'Gebruiker niet gevonden' });
+    if (err) return res.render('reset-password', { error: 'DatabaseError' });
+    if (!user) return res.render('reset-password', { error: 'User not found' });
 
     const hashed = bcrypt.hashSync(newPassword, 10);
 
     db.run('UPDATE users SET password = ? WHERE id = ?', [hashed, user.id], (err2) => {
       if (err2) {
-        return res.render('reset-password', { error: 'Kon wachtwoord niet updaten' });
+        return res.render('reset-password', { error: 'Could not update password' });
       }
-      res.render('reset-password', { success: 'Wachtwoord succesvol aangepast' });
+      res.render('reset-password', { success: 'Password changed successfully' });
       res.redirect('/Login?reset=success');
     });
   });
