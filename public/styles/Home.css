@@ -117,7 +117,6 @@ label {
     /* Adjusted from 300px to 320px for even larger */
     height: auto;
     border-radius: 5px;
-    border: 2px solid #5900b3;
     transition: transform 0.3s ease;
     display: block;
     /* margin: 0 auto 15px auto; Removed specific bottom margin as level-info will follow */

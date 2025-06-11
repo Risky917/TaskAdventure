@@ -188,7 +188,7 @@ db.serialize(() => {
    db.all(`SELECT id FROM character_info WHERE baseImage = '/img/samurai.png'`, (err, rows) => {
     if (rows.length === 0) {
       db.run(`INSERT INTO character_info (baseImage, evolutionStage1Image, evolutionStage2Image, evolutionName) VALUES (?, ?, ?, ?)`,
-        ['/img/samurai.png', '/img/samurai2.png', '/img/samurai3.png', 'Samurai']);
+        ['/img/samurai.png', '/img/samurai2Evo.png', '/img/samurai3.png', 'Samurai']);
     }
   });
     db.all(`SELECT id FROM character_info WHERE baseImage = '/img/purpleguy.png'`, (err, rows) => {

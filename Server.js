@@ -830,24 +830,86 @@ app.get('/access-rights', (req, res) => {
 
 // Leaderboard
 app.get('/leaderboard', requireLogin, (req, res) => {
-  db.all(`
-    SELECT c.name, c.xp, ci.baseImage, ci.evolutionStage1Image, ci.evolutionStage2Image, c.level
-    FROM characters c
-    LEFT JOIN character_info ci ON c.characterInfoId = ci.id
-    ORDER BY c.xp DESC
-    LIMIT 10
-  `, [], (err, rows) => {
+  const userId = req.session.user?.id;
+  console.log("Leaderboard accessed by user ID:", userId);
+
+  if (!userId) {
+    return res.status(401).send("Not logged in");
+  }
+
+  // Step 1: Check if the user is in a class
+  db.get(`SELECT classId FROM class_users WHERE userId = ?`, [userId], (err, classRow) => {
     if (err) {
-      console.error("Query error:", err.message);
+      console.error("Error getting classId:", err.message);
       return res.status(500).send("Database error");
     }
 
-    const top3 = rows.slice(0, 3);
-    const others = rows.slice(3);
+    const isInClass = !!classRow;
+    const classId = classRow?.classId;
 
-    res.render('LeaderBoard', { top3, others, pageTitel: 'Leaderboard' });
+    // Step 2: Get global top 10
+    db.all(`
+      SELECT c.name, c.xp, c.level, ci.baseImage, ci.evolutionStage1Image, ci.evolutionStage2Image
+      FROM characters c
+      LEFT JOIN character_info ci ON c.characterInfoId = ci.id
+      ORDER BY c.xp DESC
+      LIMIT 10
+    `, [], (err, globalRows) => {
+      if (err) {
+        console.error("Error fetching global leaderboard:", err.message);
+        return res.status(500).send("Database error");
+      }
+
+      const top3 = globalRows.slice(0, 3);
+      const others = globalRows.slice(3);
+
+      if (!isInClass) {
+        // User not in a class – only show global leaderboard
+        return res.render('LeaderBoard', {
+          top3,
+          others,
+          classTop3: [],
+          classOthers: [],
+          pageTitel: 'Leaderboard',
+          noClass: true
+        });
+      }
+
+      // Step 3: Get class leaderboard
+      db.all(`
+        SELECT c.name, c.xp, c.level, ci.baseImage, ci.evolutionStage1Image, ci.evolutionStage2Image
+        FROM characters c
+        JOIN class_users cu ON cu.userId = c.userId
+        LEFT JOIN character_info ci ON c.characterInfoId = ci.id
+        WHERE cu.classId = ?
+        ORDER BY c.xp DESC
+        LIMIT 10
+      `, [classId], (err, classRows) => {
+        if (err) {
+          console.error("Error fetching class leaderboard:", err.message);
+          return res.status(500).send("Database error");
+        }
+
+        const classTop3 = classRows.slice(0, 3);
+        const classOthers = classRows.slice(3);
+
+        res.render('LeaderBoard', {
+          top3,
+          others,
+          classTop3,
+          classOthers,
+          pageTitel: 'Leaderboard',
+          noClass: false
+        });
+      });
+    });
   });
 });
+
+
+
+
+
 
 
 app.post('/admin/delete-user', requireAdmin, (req, res) => {

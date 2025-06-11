@@ -1,12 +1,12 @@
 <link rel="stylesheet" href="/styles/leaderboard.css">
 
+<h1>Global leaderboard</h1>
 <div class="podium">
     <div class="block second">
         <div class="namexp">
             <p class="top3">{{top3.[1].name}}</p>
             <p class="top3 xp">{{top3.[1].xp}} XP</p>
         </div>
-        {{!-- CORRECTED LINE BELOW --}}
         <img src="{{getCharacterImage top3.[1] top3.[1]}}" class="character-img" alt="2nd place" />
         <p class="place">2</p>
     </div>
@@ -16,7 +16,6 @@
             <p class="top3">{{top3.[0].name}}</p>
             <p class="top3 xp">{{top3.[0].xp}} XP</p>
         </div>
-        {{!-- CORRECTED LINE BELOW --}}
         <img src="{{getCharacterImage top3.[0] top3.[0]}}" class="character-img" alt="1st place" />
         <p class="place">1</p>
     </div>
@@ -26,7 +25,6 @@
             <p class="top3">{{top3.[2].name}}</p>
             <p class="top3 xp">{{top3.[2].xp}} XP</p>
         </div>
-        {{!-- CORRECTED LINE BELOW --}}
         <img src="{{getCharacterImage top3.[2] top3.[2]}}" class="character-img" alt="3rd place" />
         <p class="place">3</p>
     </div>
@@ -37,7 +35,6 @@
         <div class="scroll-content">
             {{#each others}}
             <div class="item">
-                {{!-- CORRECTED LINE BELOW --}}
                 <img src="{{getCharacterImage this this}}" class="head" />
                 <p class="name">{{this.name}}</p>
                 <p class="experience">XP: {{this.xp}}</p>
@@ -46,3 +43,51 @@
         </div>
     </div>
 </div>
+
+{{#unless noClass}}
+<h1>Classroom leaderboard</h1>
+<div class="podium">
+    <div class="block second">
+        <div class="namexp">
+            <p class="top3">{{classTop3.[1].name}}</p>
+            <p class="top3 xp">{{classTop3.[1].xp}} XP</p>
+        </div>
+        <img src="{{getCharacterImage classTop3.[1] classTop3.[1]}}" class="character-img" alt="2nd place" />
+        <p class="place">2</p>
+    </div>
+
+    <div class="block first">
+        <div class="namexp">
+            <p class="top3">{{classTop3.[0].name}}</p>
+            <p class="top3 xp">{{classTop3.[0].xp}} XP</p>
+        </div>
+        <img src="{{getCharacterImage classTop3.[0] classTop3.[0]}}" class="character-img" alt="1st place" />
+        <p class="place">1</p>
+    </div>
+
+    <div class="block third">
+        <div class="namexp">
+            <p class="top3">{{classTop3.[2].name}}</p>
+            <p class="top3 xp">{{classTop3.[2].xp}} XP</p>
+        </div>
+        <img src="{{getCharacterImage classTop3.[2] classTop3.[2]}}" class="character-img" alt="3rd place" />
+        <p class="place">3</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="scroll-box">
+        <div class="scroll-content">
+            {{#each classOthers}}
+            <div class="item">
+                <img src="{{getCharacterImage this this}}" class="head" />
+                <p class="name">{{this.name}}</p>
+                <p class="experience">XP: {{this.xp}}</p>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>
+{{else}}
+    <p class="info-text">You are not in a class. Join a class to see your classroom leaderboard.</p>
+{{/unless}}
