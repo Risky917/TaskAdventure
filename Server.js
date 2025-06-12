@@ -618,8 +618,8 @@ app.post('/admin/update-character-xp', (req, res) => {
     return res.status(400).send('Invalid input');
   }
 
-  const xpThreshold = 100;
-  const newLevel = Math.floor(newTotalXp / xpThreshold) + 1;
+  // Use the same leveling function as user XP gain
+  const { level: newLevel } = calculateLevelAndXpProgress(newTotalXp);
 
   db.run(
     'UPDATE characters SET xp = ?, level = ? WHERE id = ?',
@@ -635,6 +635,7 @@ app.post('/admin/update-character-xp', (req, res) => {
     }
   );
 });
+
 
 // Focus Mode route
 app.get('/FocusMode', requireLogin, (req, res) => {
