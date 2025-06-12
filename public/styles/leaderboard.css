@@ -149,8 +149,8 @@ body {
         order: 3;
     }
 }
-h1:first-of-type {
-    margin-top: 4rem;
+.global-title {
+    margin-top: 4rem; 
 }
 
 
