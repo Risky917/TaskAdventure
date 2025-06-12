@@ -16,8 +16,8 @@
                         <p class="email">{{this.email}}</p>
                     </div>
                     <div class="request-actions">
-                        <button class="add-friend-btn" data-requestid="{{this.requestId}}">Accept</button>
-                        <button class="remove-friend-btn" data-requestid="{{this.requestId}}">Refuse</button>
+                        <button class="accept-btn" data-requestid="{{this.requestId}}">Accept</button>
+                        <button class="decline-btn" data-requestid="{{this.requestId}}">Refuse</button>
                     </div>
                 </div>
                 {{/each}}
@@ -27,7 +27,7 @@
             </div>
         </div>
         <button class="button-friendpage" onclick="location.href='/my-friends'" type="button">Friends</button>
-        <button class="button-friendpage" onclick="location.href='/Friends'" type="button">Send friend request</button>
+        <button class="button-friendpage" onclick="location.href='/Friends'" type="button">send friend request</button>
     </div>
 
     <script>

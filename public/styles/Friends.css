@@ -11,13 +11,12 @@ body{
 
 .scroll-box {
     width: 40%;
-    max-height: 300px;
+    max-height: 320px;
     overflow-y: auto;
     background-color: rgb(92, 35, 98); 
     padding: 1rem;
     border-radius: 12px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-bottom:2rem;
 }
 
 .scroll-content {
@@ -99,6 +98,20 @@ body{
     border-radius: 8px;
 }
 .remove-friend-btn{
+    color: #1e1e1e;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border-radius: 8px;
+}
+.accept-btn{
+    color: #1e1e1e;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border-radius: 8px;
+}
+.decline-btn{
     color: #1e1e1e;
     border: none;
     cursor: pointer;
