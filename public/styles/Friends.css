@@ -82,13 +82,27 @@ body{
 }
 .button-friendpage {
 
-  padding: 5px;
-  border-radius: 8px;
-  color: #1e1e1e;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.2s;
-  font-size: 1.2rem;
-  width: 30%;
+    padding: 5px;
+    border-radius: 8px;
+    color: #1e1e1e;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 1.2rem;
+    width: 30%;
+}
+.add-friend-btn{
+    color: #1e1e1e;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border-radius: 8px;
+}
+.remove-friend-btn{
+    color: #1e1e1e;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border-radius: 8px;
 }
